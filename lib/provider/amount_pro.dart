@@ -1,9 +1,9 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
-// class AmountPro with ChangeNotifier {
-//   late final String amount;
-//   late final List<String> values;
-//   String selectedAmount = '';
-//   @override
-//   notifyListeners();
-// }
+class AmountPro with ChangeNotifier {
+  String selectedAmount = '';
+  void setSelectedAmount(String amount) {
+    selectedAmount = amount;
+    notifyListeners();
+  }
+}

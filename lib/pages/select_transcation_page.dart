@@ -1,34 +1,33 @@
-import 'package:atm_machine/widgets/buildbuttonrow.dart';
-import 'package:flutter/material.dart';
+import 'package:atm_machine/provider/amount_pro.dart';
 import 'package:atm_machine/widgets/atm_button.dart';
+import 'package:atm_machine/widgets/buildbuttonrow.dart';
 import 'package:atm_machine/pages/other_page.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SelectTranscationPage extends StatefulWidget {
-  //final String amount;
-  const SelectTranscationPage({
-    super.key,
-  });
+  const SelectTranscationPage({super.key});
 
   @override
   State<SelectTranscationPage> createState() => _SelectTranscationPageState();
 }
 
 class _SelectTranscationPageState extends State<SelectTranscationPage> {
-  // String selectedAmount = '';
-
   @override
   Widget build(BuildContext context) {
-    //final pinpro = context.watch<AmountPro>();
-    final pro = Buildbuttonrow;
+    final amountPro = context.watch<AmountPro>();
+
     return Scaffold(
-      backgroundColor: Colors.transparent,
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 243, 226, 174),
-        title: const Center(
-          child: Text("@@@", style: TextStyle(fontWeight: FontWeight.bold)),
+        centerTitle: true,
+        title: const Text(
+          "SELECT TRANSACTION",
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
       body: Container(
+        width: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(
@@ -38,80 +37,84 @@ class _SelectTranscationPageState extends State<SelectTranscationPage> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 50.0),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 40),
           child: Column(
             children: [
-              const SizedBox(height: 20),
               const Text(
                 "Please Select AMOUNT!",
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
+
               const SizedBox(height: 40),
 
               // Amount buttons
-              // Buildbuttonrow([
-              //   '1000',
-              //   '2000',
-              //   '5000',
-              // ]),
-              // Buildbuttonrow(['5000', '10000']),
-              // Buildbuttonrow(['15000', '20000']),
-              // Buildbuttonrow(['30000']),
+              Buildbuttonrow(['1000', '2000']),
+              Buildbuttonrow(['5000', '10000']),
+              Buildbuttonrow(['15000', '20000']),
+              Buildbuttonrow(['30000']),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
 
-              // Other option
+              // Other amount
               AtmButton(
                 height: 60,
+                width: double.infinity,
                 elevation: 5,
-                width: 380,
                 text: 'Other...',
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => OtherPage()),
-                  );
-                },
                 textColor: Colors.black,
                 backgroundColor: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const OtherPage(),
+                    ),
+                  );
+                },
               ),
 
-              const SizedBox(height: 50),
+              const Spacer(),
+
+              // YES / NO buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   AtmButton(
                     height: 60,
+                    width: 160,
                     elevation: 5,
-                    width: 180,
                     text: 'NO',
+                    textColor: Colors.black,
+                    backgroundColor: Colors.white,
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    textColor: Colors.black,
-                    backgroundColor: Colors.white,
                   ),
                   AtmButton(
                     height: 60,
+                    width: 160,
                     elevation: 5,
-                    width: 180,
                     text: 'YES',
+                    textColor: Colors.black,
+                    backgroundColor: Colors.white,
                     onPressed: () {
-                      if (pro.isEmpty) {
+                      if (amountPro.selectedAmount.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text("Please select an amount first!"),
+                            content:
+                                const Text("Please select an amount first!"),
                             backgroundColor: Colors.red,
                             behavior: SnackBarBehavior.floating,
-                            margin: EdgeInsets.only(
-                                bottom: 30.0,
-                                left: 20.0,
-                                right: 20.0), // Add space from bottom
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
+                            ),
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 30,
                             ),
                           ),
                         );
@@ -119,8 +122,6 @@ class _SelectTranscationPageState extends State<SelectTranscationPage> {
                         Navigator.pop(context);
                       }
                     },
-                    textColor: Colors.black,
-                    backgroundColor: Colors.white,
                   ),
                 ],
               ),

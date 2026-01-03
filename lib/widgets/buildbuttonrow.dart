@@ -4,37 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Buildbuttonrow extends StatelessWidget {
-  //final dynamic values;
+  final List<String> values;
 
-  const Buildbuttonrow(List<String> list, {super.key});
+  const Buildbuttonrow(this.values, {super.key});
 
   @override
-  Widget build(
-    BuildContext context,
-  ) {
-    final String amount;
-    List<String> values = [
-      '1000',
-      '2000',
-      '5000',
-      '10000',
-      '15000',
-      '20000',
-      '30000'
-    ];
-    String selectedAmount = '';
-    //final pinpro = context.watch<AmountPro>();
-    // final List<String> values;
-    //return  Widget buildButtonRow(List<String> values) {
+  Widget build(BuildContext context) {
+    final pinpro = context.watch<AmountPro>();
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: values.map((amount) {
-          bool isSelected = selectedAmount == amount;
+          bool isSelected = pinpro.selectedAmount == amount;
+
           return GestureDetector(
             onTap: () {
-              selectedAmount = amount;
+              context.read<AmountPro>().setSelectedAmount(amount);
             },
             child: AtmButton(
               height: 60,

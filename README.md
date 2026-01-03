@@ -1,4 +1,5 @@
 # atm_machine
+<<<<<<< HEAD
 
 A new Flutter project.
 
@@ -14,3 +15,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+how to working atm machine
+>>>>>>> 59f12ad9106c5cac7825bafa62cc2e73b1af617c
