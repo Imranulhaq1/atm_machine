@@ -1,3 +1,4 @@
+import 'package:atm_machine/pages/create_pin.dart';
 import 'package:atm_machine/provider/pin_provider.dart';
 import 'package:atm_machine/widgets/keypadrow.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,37 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 241, 225, 176),
         title: const Center(
-          child: Text("@@@", style: TextStyle(fontWeight: FontWeight.bold)),
+          child: Text("ATM MACHINE",
+              style: TextStyle(fontWeight: FontWeight.bold)),
         ),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              final slected = await showMenu(
+                  context: context,
+                  position: const RelativeRect.fromLTRB(1000, 65, 18, 20),
+                  items: [
+                    const PopupMenuItem(
+                      value: 'Create PIN',
+                      child: Text('Create PIN'),
+                    ),
+                    const PopupMenuItem(
+                      value: 'Page2',
+                      child: Text('Open Page 2'),
+                    ),
+                  ]);
+              if (slected == 'Create PIN') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CreatePin()),
+                );
+              } else if (slected == 'Page2') {
+                Navigator.pushNamed(context, '/page2');
+              }
+            },
+            icon: const Icon(Icons.arrow_drop_down_circle),
+          ),
+        ],
       ),
       backgroundColor: const Color.fromARGB(255, 172, 197, 240),
       body: Padding(

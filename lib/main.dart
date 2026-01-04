@@ -1,3 +1,4 @@
+import 'package:atm_machine/pages/my_home_page.dart';
 import 'package:atm_machine/pages/splashscreen.dart';
 import 'package:atm_machine/provider/amount_pro.dart';
 import 'package:atm_machine/provider/pin_provider.dart';

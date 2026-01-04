@@ -51,7 +51,8 @@ class _SplashScreenState extends State<SplashScreen>
             scale: _scale,
             child: Image.asset(
               'assets/ATM.png',
-              width: 180,
+              height: 100,
+              width: 100,
             ),
           ),
         ),
